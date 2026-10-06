@@ -1,0 +1,28 @@
+# Supplied public destinations
+
+Public URLs extracted from the approved link inventory on 6 October 2026.
+
+[Link](https://substack.com/@soralive)
+[Link](https://hades.soralives.xyz/)
+[Link](https://soundcloud.com/soralive)
+[Link](https://soundcloud.com/soralive/sora-live-set-tsl-mondays)
+[Link](https://on.soundcloud.com/l8BG7gjSk8QYauUDdL)
+[Link](https://soundcloud.com/soralive/sora-live-set-tsl-oct-27th)
+[Link](https://on.soundcloud.com/6MnxBFfbomp3Z5rDvi)
+[Link](https://soundcloud.com/soralive/sora-live-set-echo-nov-22nd)
+[Link](https://on.soundcloud.com/NRgeAxC9RPJP3um0hm)
+[Link](https://soundcloud.com/soralive/zone-out-set-nov-29th)
+[Link](https://on.soundcloud.com/LhrLnEfmXq22LBsY41)
+[Link](https://soundcloud.com/soralive/addicted-september-26-2025-prep-set)
+[Link](https://on.soundcloud.com/boViINInOHRzSbngol)
+[Link](https://soundcloud.com/soralive/sora-live-set-tashas-popup)
+[Link](https://on.soundcloud.com/uDJzjN3MEOsDRtrS6o)
+[Link](https://linktr.ee/rogueskye)
+[Link](https://spotify.link/RNSiZjgPtXb)
+[Link](https://spotify.link/1vHqe65OtXb)
+[Link](https://spotify.link/qRakhYtOtXb)
+[Link](https://tobiarogunmati.com/)
+[Link](https://delphiatlas.com/)
+[Link](https://www.instagram.com/rogueskye)
+[Link](https://www.tiktok.com/@rogueskye)
+[Link](https://x.com/soralives)

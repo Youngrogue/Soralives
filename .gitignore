@@ -1,0 +1,58 @@
+# Public repository: opt in to deliverable folders at the workspace root.
+# Originals, personal source material, historical plans and prototypes stay local.
+/*
+!/.gitignore
+!/.nvmrc
+!/README.md
+!/docs/
+!/mockup/
+!/.github/
+
+# Installed dependencies, including the existing local symlink.
+node_modules
+.pnp.*
+
+# Build output and caches.
+dist/
+build/
+coverage/
+.vite/
+.cache/
+.turbo/
+*.tsbuildinfo
+
+# Credentials and local provider configuration.
+.env
+.env.*
+!.env.example
+.npmrc
+.aws/
+.ssh/
+.vercel/
+.netlify/
+.wrangler/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local machine and test artifacts.
+.DS_Store
+Thumbs.db
+*.log
+*.local
+*.tmp
+*.swp
+*.swo
+.idea/
+.vscode/
+.playwright-mcp/
+playwright-report/
+test-results/
+/mockup/review/
+/mockup/PLAN.md
+*.zip
+*.tar
+*.gz
+
+# Do not broadly ignore media: mockup/public contains required site assets.

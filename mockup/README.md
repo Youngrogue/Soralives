@@ -1,41 +1,55 @@
 # The Soraverse website
 
-Current baseline prepared for GitHub on 6 October 2026. The visual revision requested after the mockup remains planned.
+The current v2 implementation uses a short home page and four dedicated worlds. All changes are local until pushed and deployed.
 
-## Run from a fresh clone
+## Run
+
+From the repository root:
 
 ```sh
-cd mockup
 nvm install
 nvm use
+cd mockup
 npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:4176/. No credentials or .env file are needed. `npm test` runs content checks; `npm run build` runs TypeScript checking and produces `dist/`. `npm run preview` serves the built site on port 4176 when the development server is stopped.
+Open http://127.0.0.1:4176/. No credentials or .env file are needed.
 
-## Included
+```sh
+npm test
+npm run build
+node scripts/check-pages.mjs
+npm run preview
+```
 
-1. Colourful homepage and the organised Explore menu.
-2. Higgsfield cloud film, still fallback and motion controls.
-3. Cinematic full length intro portrait and selected personal photographs.
-4. Music links, four employer entries, skills and three project showcases with screenshots and films.
-5. All 269 cultural entries, searchable shelves and direct Library navigation.
-6. Local room illustrations, company marks, project logos and fonts.
-7. Contact and supplied social and Substack links.
+Stop the dev server before using preview on the same port. To run both, use `npm run preview -- --port 4177`. To check its HTTP routes from the repository root, run `node mockup/scripts/check-pages.mjs mockup/dist http://127.0.0.1:4177`.
 
-All 52 files in `public/` are included in the repository. These are the web assets, including the required photographs and videos. Original generation masters and unused photo archives remain in the local parent workspace and are not needed to run the site.
+## Pages
 
-## Content and structure
+| Path | Content |
+| --- | --- |
+| `/` | Hero, introduction, portrait carousel, room gateway, quote and contact |
+| `/tech/` | Projects, films, progress, career timeline, toolkit, Council and enquiries |
+| `/sound/` | Music identity, six sets, playlists, music goals, photos and bookings |
+| `/arts/` | Stories, art, anime, gaming, cultural goals and Library entrance |
+| `/freedom/` | Society, histories, ideas wall, writing goals and Council |
+| `/library/` | Searchable screen, reading and games shelves |
 
-`src/Home.tsx` holds homepage sections. `src/TechSection.tsx` holds career and project presentation. `src/professional-content.ts` holds professional records. `src/content.ts` holds music, social links and the cultural catalogue. `src/navigation.ts` defines the Explore directory. `src/Library.tsx` handles browsing and search. `src/HeroAtmosphere.tsx` handles the current video atmosphere. Existing Three.js experiments remain in source but are not mounted by the current hero.
+Old home section hashes forward to the correct page. Unknown paths show a useful 404.
 
-Content tests use `tests/fixtures/`, so a fresh clone does not depend on excluded parent notes. Update the approved fixture and application content together when the underlying supplied content changes.
+## Editing
 
-## Deployment
+Page components live in `src/Home.tsx`, `TechSection.tsx`, `SoundPage.tsx`, `ArtsPage.tsx`, `SocietySection.tsx` and `Library.tsx`. `src/routes.mjs` holds page metadata and legacy destinations. `navigation.ts` defines Explore; `PageDirectory.tsx` holds local contents.
 
-Set the hosting project root to `mockup`, install with `npm ci`, build with `npm run build`, and publish `dist`. `/` and `/library/` are separate HTML entry points. The current app expects hosting at the domain root. A GitHub Pages project URL with a repository subpath needs a separate path review before deployment.
+`professional-content.ts` holds factual career and project records. `content.ts` holds supplied music links, socials, Council copy and the cultural catalogue. `living-content.ts` holds editable goals and ideas wall entries. Update approved content fixtures alongside any intentional catalogue or destination changes.
 
-The preview retains `noindex, nofollow`. Hosting, domain setup, production metadata, final accessibility and media attribution review remain launch work. No CMS, newsletter submission or contact backend is configured.
+Required optimised media and fonts live in `public/`. Original archives and generation masters are not required to run the website. The Three.js hero and its media load on home. Other pages load their own components rather than the entire experience.
 
-See [dependencies and access](../docs/DEPENDENCIES-AND-ACCESS.md), [next revision](../docs/NEXT-REVISION.md) and [repository checks](../docs/REPOSITORY-CHECKS.md).
+## Hosting
+
+Vercel project root: `mockup`. Install: `npm ci`. Build: `npm run build`. Output: `dist`. `vercel.json` serves the separate HTML pages and custom 404; do not rewrite every route to `/index.html`.
+
+Vercel production builds allow indexing and include six pages in the sitemap. Preview and local builds remain outside search indexes. The application reads only Vercel’s automatic `VERCEL_ENV` for this purpose. Email and public platform links need no integration credentials. No CMS, contact backend or newsletter signup service is configured.
+
+See [dependencies and access](../docs/DEPENDENCIES-AND-ACCESS.md), [revision record](../docs/NEXT-REVISION.md) and [design system](../docs/DESIGN-SYSTEM.md).

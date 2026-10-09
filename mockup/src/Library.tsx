@@ -38,7 +38,7 @@ export function Library() {
   function clearSearch() {setQuery('');search.current?.focus();}
 
   return <div className="library-page section-shell">
-    <a className="back-link" href="/#culture"><Arrow/><span>Back to Arts & Culture</span></a>
+    <a className="back-link" href="/arts/"><Arrow/><span>Back to Arts & Culture</span></a>
     <div className="library-heading"><div><p className="eyebrow">ARTS & CULTURE</p><h1 id="library-title" tabIndex={-1}>The <em>Library.</em></h1><p>Films, series, manga and worlds to explore.<br/>Browse the shelves or find a title.</p></div><img src="/assets/culture-room.webp" alt="" width="960" height="720"/></div>
     <div className="library-controls" id="library-browse">
       <div className="library-toolbar">
@@ -52,7 +52,7 @@ export function Library() {
         }}>{shelfLabels[s.id]}<span>{s.titles.length}</span></button>)}</div>
         <div className="library-search"><label className="sr-only" htmlFor="title-search">Search titles across the Library</label><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.5"/><path d="m16 16 5 5" stroke="currentColor" strokeWidth="1.5"/></svg><input ref={search} id="title-search" type="search" placeholder="Find a title" value={query} onChange={e=>setQuery(e.target.value)} autoComplete="off"/>{query&&<button onClick={clearSearch} aria-label="Clear title search">Clear</button>}</div>
       </div>
-      <div className="library-result-line"><p role="status" aria-live="polite">{term?`${selected.titles.length} of ${total} titles on this shelf`:`${total} titles on this shelf`}</p><span>Alphabetical</span></div>
+      <div className="library-result-line"><p role="status" aria-live="polite">{term?`${selected.titles.length} of ${total} ${total === 1 ? 'title' : 'titles'} on this shelf`:`${total} ${total === 1 ? 'title' : 'titles'} on this shelf`}</p><span>Alphabetical</span></div>
     </div>
     {filtered.map(s=><section key={s.id} id={`shelf-${s.id}`} role="tabpanel" aria-labelledby={`tab-${s.id}`} hidden={active!==s.id} tabIndex={0} className="shelf-panel">
       <p className="shelf-description">{shelfDescriptions[s.id]} A collection to explore, with personal ratings to come.</p>
@@ -61,3 +61,5 @@ export function Library() {
     <div className="library-end"><Star/><p>There's always another world to discover.</p><a href="#library-title" onClick={e=>{e.preventDefault();moveToAnchor('library-title');}}>Back to the top ↑</a></div>
   </div>;
 }
+
+export default Library;

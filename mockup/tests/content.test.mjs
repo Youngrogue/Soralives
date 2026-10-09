@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import { libraryShelves, musicLinks, playlistLinks, socials } from '../src/content.ts';
+import { libraryShelves, musicLinks, playlistLinks, socials, councilLinks, animeLinks } from '../src/content.ts';
 
 import { professionalProjects, experienceItems } from '../src/professional-content.ts';
 
@@ -41,7 +41,7 @@ test('every current catalogue entry appears once in its source order', () => {
 
 test('outbound destinations use supplied URLs and include all six DJ sets', () => {
   const suppliedUrls = new Set(inventory.match(/https:\/\/[^\s`)<]+/g));
-  const outbound = [...musicLinks, ...playlistLinks, ...socials, ...professionalProjects.filter(project => project.url)];
+  const outbound = [...musicLinks, ...playlistLinks, ...socials, ...councilLinks, ...animeLinks, ...professionalProjects.filter(project => project.url)];
   for (const entry of outbound) assert.ok(suppliedUrls.has(entry.url), `URL missing from inventory: ${entry.url}`);
 
   const directSets = [...inventory.matchAll(/\]\((https:\/\/soundcloud\.com\/soralive\/[a-z0-9-]+)\)/g)].map(match => match[1]);
@@ -53,7 +53,7 @@ test('outbound destinations use supplied URLs and include all six DJ sets', () =
   assert.ok(musicLinks.some(link => link.url === 'https://linktr.ee/rogueskye'));
   assert.ok(musicLinks.every(link => !/[-–—]/u.test(link.label)));
   assert.equal(playlistLinks.filter(link => link.url.startsWith('https://spotify.link/')).length, 3);
-  assert.deepEqual(socials.map(link => link.label), ['Instagram', 'TikTok', 'X', 'Substack']);
+  assert.deepEqual(socials.map(link => link.label), ['Instagram', 'TikTok', 'X', 'Threads', 'Substack']);
 });
 
 test('project status and destinations follow verified current evidence', () => {

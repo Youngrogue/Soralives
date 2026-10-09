@@ -51,6 +51,7 @@ playwright-report/
 test-results/
 /mockup/review/
 /mockup/PLAN.md
+/docs/drafts/
 *.zip
 *.tar
 *.gz

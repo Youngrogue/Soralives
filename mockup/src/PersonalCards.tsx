@@ -3,28 +3,57 @@ import { Arrow, Star } from './Icons';
 
 export function ReflectionCard({ image, alt, title, text, className = '' }: {image:string;alt:string;title:string;text:string;className?:string}) {
   const [flipped,setFlipped]=useState(false);
-  return <article className={`reflection-card ${className} ${flipped?'is-flipped':''}`}>
+  const [instant,setInstant]=useState(false);
+  return <article className={`reflection-card ${className} ${flipped?'is-flipped':''} ${instant?'instant':''}`}>
     <div className="reflection-turn">
       <div className="reflection-face reflection-front" aria-hidden={flipped}><img src={image} alt={alt} width="800" height="1067" loading="lazy"/></div>
       <div className="reflection-face reflection-back" aria-hidden={!flipped} tabIndex={flipped?0:-1}><Star/><h3>{title}</h3><p>{text}</p><span className="eyebrow">A LITTLE ABOUT MY OUTLOOK</span></div>
     </div>
-    <button className="reflection-control" onClick={()=>setFlipped(!flipped)} aria-expanded={flipped}><span>{flipped?'Back to the photo':title}</span><span className="turn-icon" aria-hidden="true">↻</span></button>
+    <button className="reflection-control" onClick={event=>{setInstant(event.detail===0);setFlipped(!flipped);}} aria-expanded={flipped}><span>{flipped?'Back to the photo':title}</span><span className="turn-icon" aria-hidden="true">↻</span></button>
   </article>;
 }
-const photographs=[
+type Photograph = {src:string;alt:string;caption:string;reflection?:{title:string;text:string}};
+const photographs: Photograph[] = [
   {src:'/media/personal/dj-decks.webp',alt:'Sora wearing headphones with his hand on the DJ decks.',caption:'At the decks'},
   {src:'/media/personal/dj-sage.webp',alt:'Sora playing a DJ set, with the original Sage’s House photograph mark visible.',caption:'In the moment'},
 ];
-export function MusicPhotographs() {
+const portraits: Photograph[] = [
+  {src:'/media/personal/sora-intro.webp',alt:'Sora in sunglasses, a white linen shirt and patterned red trousers against a cinematic blue backdrop.',caption:'Hi, I’m Sora',reflection:{title:'Why I make time for this',text:'Our time is finite. I want to spend mine paying attention, making things and discovering more.'}},
+  {src:'/media/personal/art-portrait.webp',alt:'Sora among framed artworks in a warmly lit interior.',caption:'Among the frames',reflection:{title:'A different way of seeing',text:'I appreciate the imagination and work behind creating something that makes us feel.'}},
+  {src:'/media/personal/dj-decks.webp',alt:'Sora wearing headphones with his hand on the DJ decks.',caption:'Finding the rhythm',reflection:{title:'A room finding its rhythm',text:'Good music, shared moments and the people who make a night worth remembering.'}},
+];
+
+function PhotoCarousel({photos,label,className=''}:{photos:Photograph[];label:string;className?:string}) {
   const [active,setActive]=useState(0);
-  const track=useRef<HTMLDivElement>(null);
-  const pointer=useRef<number|null>(null);
+  const [instant,setInstant]=useState(false);
+  const pointer=useRef<{id:number;x:number;y:number}|null>(null);
   const swiped=useRef(false);
-  const go=(next:number)=>setActive(Math.max(0,Math.min(photographs.length-1,next)));
-  return <div className="music-photographs">
-    <div className="photo-window" ref={track} onPointerDown={e=>{pointer.current=e.clientX;swiped.current=false;}} onPointerUp={e=>{if(pointer.current!==null&&Math.abs(e.clientX-pointer.current)>45){swiped.current=true;go(active+(e.clientX<pointer.current?1:-1));}pointer.current=null;}} onClickCapture={e=>{if(swiped.current){e.preventDefault();swiped.current=false;}}} onPointerCancel={()=>pointer.current=null}>
-      {photographs.map((photo,i)=><a key={photo.src} href={photo.src} target="_blank" rel="noreferrer" hidden={i!==active} aria-label={`Open full photo: ${photo.caption}`}><img src={photo.src} alt={photo.alt} width="800" height="1000" loading="lazy" draggable={false}/></a>)}
+  const go=(next:number,keyboard=false)=>{setInstant(keyboard);setActive(Math.max(0,Math.min(photos.length-1,next)));};
+  return <div className={`photo-carousel ${className}`} role="region" aria-roledescription="carousel" aria-label={label}>
+    <div className="carousel-window" onPointerDown={e=>{
+      swiped.current=false;
+      if(!e.isPrimary || e.button!==0 || (e.target as HTMLElement).closest('button'))return;
+      pointer.current={id:e.pointerId,x:e.clientX,y:e.clientY};
+      if(e.pointerType!=='mouse')e.currentTarget.setPointerCapture(e.pointerId);
+    }} onPointerUp={e=>{
+      const start=pointer.current; pointer.current=null;
+      if(!start || start.id!==e.pointerId)return;
+      const dx=e.clientX-start.x,dy=e.clientY-start.y;
+      if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)*1.2){swiped.current=true;go(active+(dx<0?1:-1));}
+      if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);
+    }} onPointerCancel={()=>{pointer.current=null;}} onLostPointerCapture={()=>{pointer.current=null;}}
+    onClickCapture={e=>{if(swiped.current){e.preventDefault();e.stopPropagation();swiped.current=false;}}}>
+      <div className={`carousel-track ${instant?'instant':''}`} style={{transform:`translate3d(${-active*100}%,0,0)`}}>
+        {photos.map((photo,i)=><div className="carousel-slide" key={photo.src} role="group" aria-roledescription="slide" aria-label={`${i+1} of ${photos.length}: ${photo.caption}`} aria-hidden={i!==active} inert={i!==active}>
+          {photo.reflection?<ReflectionCard image={photo.src} alt={photo.alt} title={photo.reflection.title} text={photo.reflection.text}/>:<a className="carousel-image-link" href={photo.src} target="_blank" rel="noreferrer" aria-label={`Open full photo: ${photo.caption}`} draggable={false}><img src={photo.src} alt={photo.alt} width="800" height="1000" loading="lazy" draggable={false}/></a>}
+        </div>)}
+      </div>
     </div>
-    <div className="photo-caption"><p aria-live="polite">{photographs[active].caption}<small>{active+1} of {photographs.length}</small></p><div><button disabled={active===0} onClick={()=>go(active-1)} aria-label="Previous photo"><Arrow className="previous-arrow"/></button><button disabled={active===photographs.length-1} onClick={()=>go(active+1)} aria-label="Next photo"><Arrow/></button></div></div>
+    <div className="photo-caption"><p aria-live="polite" aria-atomic="true">{photos[active].caption}<small>{String(active+1).padStart(2,'0')} / {String(photos.length).padStart(2,'0')}</small></p><div>
+      <button disabled={active===0} onClick={e=>go(active-1,e.detail===0)} aria-label={`Previous ${label.toLowerCase()} photo`}><Arrow className="previous-arrow"/></button>
+      <button disabled={active===photos.length-1} onClick={e=>go(active+1,e.detail===0)} aria-label={`Next ${label.toLowerCase()} photo`}><Arrow/></button>
+    </div></div>
   </div>;
 }
+export function MusicPhotographs(){return <PhotoCarousel photos={photographs} label="Music" className="music-photographs"/>;}
+export function IntroPhotographs(){return <PhotoCarousel photos={portraits} label="About Sora" className="intro-photographs"/>;}

@@ -86,7 +86,7 @@ export function ProjectShowcase({ paused }: { paused: boolean }) {
   return <>
     <div id="projects" className="professional-projects" ref={container} tabIndex={-1}>
       <div className="project-section-heading reveal">
-        <div><p className="tech-kicker">FROM CURIOSITY TO SOMETHING REAL</p><h3>Recent project</h3></div>
+        <div><p className="tech-kicker">FROM CURIOSITY TO SOMETHING REAL</p><h3>Recent Projects</h3></div>
         <span className="project-count">THREE IDEAS<br/>TAKING SHAPE</span>
       </div>
       {professionalProjects.map((project, index) => <article className={`showcase-panel project-chapter showcase-${project.id}`} id={project.id} key={project.id} tabIndex={-1} aria-labelledby={`title-${project.id}`}>
@@ -107,7 +107,7 @@ export function ProjectShowcase({ paused }: { paused: boolean }) {
           </div>
           {project.url && <div className="showcase-actions"><a className="project-visit" href={project.url} target="_blank" rel="noreferrer">{project.linkLabel}</a></div>}
         </div>
-        <div className="showcase-visual">
+        <div className="showcase-visual project-media-stack">
           <div className="showcase-screen-stage">
             <div className="project-curtain" aria-hidden="true"/>
             <div className="showcase-window">
@@ -122,16 +122,12 @@ export function ProjectShowcase({ paused }: { paused: boolean }) {
               </button>
             </div>
           </div>
-          <div className="showcase-media-footer">
-            <p className="showcase-caption">{project.id === 'delphi' ? 'Product view, September 2026' : project.screenshotLabel}</p>
-            <button className="project-film-card" type="button" onClick={() => setMedia({ project, kind: 'film' })} aria-label={`Watch ${project.name} ${project.filmLabel.toLowerCase()}, ${project.duration}`}>
-              <span className="project-film-poster">
-                <img src={project.poster} alt="" width="960" height="540" loading="lazy"/>
-                <span className="project-film-invitation"><span aria-hidden="true">▶</span> Watch film</span>
-              </span>
-              <span className="project-film-caption"><span>{project.filmLabel}</span><span className="project-film-duration">{project.duration}</span></span>
-            </button>
-          </div>
+          <p className="showcase-caption">{project.screenshotLabel}</p>
+          <figure className="inline-project-film">
+            <video data-project-film controls playsInline preload="none" poster={project.poster} src={project.film} aria-label={`${project.name}: ${project.filmLabel}`} aria-describedby={`film-description-${project.id}`} onPlay={event=>document.querySelectorAll<HTMLVideoElement>('video[data-project-film]').forEach(video=>{if(video!==event.currentTarget)video.pause();})}>{project.id==='odyssey'&&<track kind="captions" src="/media/projects/odyssey.vtt" srcLang="en" label="English"/>}</video>
+            <figcaption><span>{project.name} · {project.filmLabel}</span><span>{project.duration}</span></figcaption>
+            <details><summary>About this film</summary><p id={`film-description-${project.id}`}>{project.filmDescription}</p></details>
+          </figure>
         </div>
       </article>)}
     </div>

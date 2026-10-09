@@ -6,20 +6,11 @@ import './cloud-passage.css';
 
 const HANDOFF = 'soraverse-cloud-passage';
 const COVER_MS = 420;
-const REVEAL_MS = 600;
 type Stage = 'idle' | 'cover' | 'reveal';
-
-function incoming(): Stage {
-  try {
-    const saved = JSON.parse(sessionStorage.getItem(HANDOFF) || 'null');
-    const allowed = !matchMedia('(prefers-reduced-motion: reduce)').matches && sessionStorage.getItem('soraverse-motion') !== 'paused';
-    return allowed && saved && saved.path === location.pathname + location.search + location.hash && Date.now() - saved.at < 12000 ? 'reveal' : 'idle';
-  } catch { return 'idle'; }
-}
 
 /** Full document navigation stays native; clouds bridge the old and new documents. */
 export function CloudPassage({paused}: {paused: boolean}) {
-  const [stage, setStage] = useState<Stage>(incoming);
+  const [stage, setStage] = useState<Stage>('idle');
   const pausedRef = useRef(paused);
   pausedRef.current = paused;
   useEffect(() => {
@@ -35,11 +26,7 @@ export function CloudPassage({paused}: {paused: boolean}) {
       if (site) site.inert = false;
       if (restoreFocus) previousFocus?.focus({preventScroll:true});
     };
-    if (incoming() === 'reveal') {
-      forget();
-      if (site) site.inert = true;
-      clearTimer = window.setTimeout(() => settle(), REVEAL_MS);
-    }
+    forget();
     const click = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || pausedRef.current || media.matches) return;
       const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[href]') : null;

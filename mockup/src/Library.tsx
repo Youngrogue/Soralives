@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Arrow, Star } from './Icons';
-import { libraryShelves } from './content';
+import { expandedLibraryShelves as shelves } from './library-content';
 import { moveToAnchor } from './navigation';
 
 const shelfLabels: Record<string,string> = { screen: 'On screen', reading: 'On the page', games: 'Games' };
@@ -9,7 +9,7 @@ const shelfDescriptions: Record<string,string> = {
   reading: 'Manga, manhwa, manhua and other stories on the page.',
   games: 'Worlds to explore through play.',
 };
-const isShelf = (id:string) => libraryShelves.some(s=>s.id===id);
+const isShelf = (id:string) => shelves.some(s=>s.id===id);
 const readShelf = () => isShelf(location.hash.slice(1)) ? location.hash.slice(1) : 'screen';
 const normalise = (value:string) => value.normalize('NFKD').replace(/\p{M}/gu,'').trim().toLowerCase();
 
@@ -18,9 +18,9 @@ export function Library() {
   const [query,setQuery] = useState('');
   const search = useRef<HTMLInputElement>(null);
   const term = normalise(query);
-  const filtered = libraryShelves.map(s=>({...s,titles:s.titles.filter(title=>normalise(title).includes(term))}));
+  const filtered = shelves.map(s=>({...s,titles:s.titles.filter(title=>normalise(title).includes(term))}));
   const selected = filtered.find(s=>s.id===active)!;
-  const total = libraryShelves.find(s=>s.id===active)!.titles.length;
+  const total = shelves.find(s=>s.id===active)!.titles.length;
 
   useEffect(()=>{
     const update=()=>{const id=location.hash.slice(1);if(isShelf(id))setActive(id);else if(!id)setActive('screen');};

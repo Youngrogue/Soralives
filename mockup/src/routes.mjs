@@ -8,6 +8,7 @@ export const worlds = [
 export const routes = [
   { id: 'home', path: '/', label: 'Home', title: 'The Soraverse | Sora Lives', description: 'Hi, I’m Sora. Explore the things I build, the sounds I love and the worlds I am curious about.' },
   ...worlds.map(world => ({ ...world, title: `${world.label} | The Soraverse`, description: world.summary })),
+  { id: 'catalogue', path: '/catalogue/', label: 'Catalogue', title: 'The Catalogue | The Soraverse', description: 'Posts, releases and discoveries from Sora, with longer thoughts on Substack.' },
   { id: 'library', path: '/library/', label: 'The Library', title: 'The Library | The Soraverse', description: 'Explore Sora’s growing collection of films, series, anime, manga and games.' },
   { id: 'not-found', path: '/404.html', label: 'Page not found', title: 'Page not found | The Soraverse', description: 'Find your way back to The Soraverse.' },
 ];
@@ -21,7 +22,7 @@ const sections = {
   tech: ['tech', 'projects', 'delphi', 'hades', 'odyssey', 'tech-goals', 'experience', 'toolkit', 'curious-council', 'services'],
   sound: ['music', 'sets', 'playlists', 'music-goals', 'events'],
   arts: ['culture', 'anime-finds', 'gaming', 'culture-goals'],
-  freedom: ['ideas', 'histories', 'ideas-wall', 'wall-pieces', 'ideas-goals', 'council-ideas'],
+  freedom: ['ideas', 'histories', 'ideas-wall', 'wall-pieces', 'ideas-goals', 'council-ideas', 'bucket-list', 'writing'],
 };
 
 /** Retain shared links from the original single page without adding a history stop. */

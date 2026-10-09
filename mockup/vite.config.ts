@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import type { Plugin } from 'vite';
 import { fileURLToPath } from 'node:url';
 import { readFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
+const loadingMarkup = readFileSync(new URL('./loading.html', import.meta.url), 'utf8');
 import { routes, routeForPath } from './src/routes.mjs';
 
 const origin = 'https://www.soralives.xyz';
@@ -15,7 +17,7 @@ function discovery(): Plugin {
       const url = `${origin}${route.path}`;
       const indexable = production && route.id !== 'not-found';
       return {
-        html: html.replace(/<script type="module"(?! blocking)/g, '<script type="module" blocking="render"')
+        html: html.replace('<body>', `<body>${loadingMarkup}`)
           .replace(/<title>.*?<\/title>/, `<title>${route.title}</title>`)
           .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${route.description}" />`)
           .replace('content="noindex, nofollow"', `content="${indexable ? 'index, follow' : 'noindex, nofollow'}"`),

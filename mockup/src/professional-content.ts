@@ -37,15 +37,6 @@ export const experienceItems = [
   },
 ] as const;
 
-export const toolkitGroups = [
-  { title: 'Delivery & analysis', icon: 'delivery', items: ['Requirements', 'QA & UAT', 'Vendor management'] },
-  { title: 'Product engineering', icon: 'code', items: ['React', 'TypeScript', 'Next.js'] },
-  { title: 'Enterprise platforms', icon: 'systems', items: ['Calypso', 'Oracle FLEXCUBE', 'Temenos'] },
-  { title: 'Design & collaboration', icon: 'design', items: ['Figma', 'Jira', 'Azure Test Plans'] },
-  { title: 'Data & infrastructure', icon: 'data', items: ['PostgreSQL', 'Payload CMS', 'Vercel'] },
-  { title: 'AI assisted building', icon: 'ai', items: ['Claude Code', 'Codex'] },
-] as const;
-
 export const professionalProjects = [
   {
     id: 'delphi', name: 'Delphi', status: 'Public website',

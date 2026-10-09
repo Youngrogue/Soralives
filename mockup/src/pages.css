@@ -1,15 +1,8 @@
 /* Shared page chrome and persistent link affordances. */
-@view-transition { navigation: auto; }
 html { background: var(--paper); }
 html[data-page='sound'] { background: var(--color-music-wash); }
 html[data-page='arts'] { background: var(--yellow); }
 html[data-page='freedom'] { background: #14273a; }
-::view-transition-old(root) { animation: page-depart 160ms ease-out both; }
-::view-transition-new(root) { animation: page-arrive 300ms var(--ease-out) both; }
-@keyframes page-depart { to { opacity: 0; transform: translateY(-8px); } }
-@keyframes page-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-html[data-motion='paused']::view-transition-old(root), html[data-motion='paused']::view-transition-new(root) { animation: none; }
-@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }
 .site .desktop-nav a[aria-current='page']:after { transform: scaleX(1); }
 .page-sound { --page-accent: #913922; --page-wash: #f5a58f; }
 .page-tech { --page-accent: var(--blue); --page-wash: var(--paper); }

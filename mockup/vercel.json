@@ -4,7 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "routes": [
-    { "src": "/(tech|sound|arts|freedom|library)", "status": 308, "headers": { "Location": "/$1/" } },
+    { "src": "/(tech|sound|arts|freedom|library|catalogue)", "status": 308, "headers": { "Location": "/$1/" } },
     { "handle": "filesystem" },
     { "src": "/.*", "status": 404, "dest": "/404.html" }
   ]

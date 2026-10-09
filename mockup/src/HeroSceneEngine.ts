@@ -1,5 +1,5 @@
 import {
-  ACESFilmicToneMapping, AmbientLight, CircleGeometry, CylinderGeometry,
+  ACESFilmicToneMapping, AmbientLight, CanvasTexture, CircleGeometry, CylinderGeometry,
   DirectionalLight, Group, Mesh, MeshStandardMaterial, OrthographicCamera,
   Scene, SphereGeometry, SRGBColorSpace, TextureLoader, TorusGeometry, WebGLRenderer,
 } from 'three';
@@ -56,18 +56,20 @@ export function createHeroScene(container: HTMLDivElement): HeroSceneController 
   labelArc.position.z = .037; record.add(labelArc);
   record.rotation.set(-.35, -.3, .25); scene.add(record);
 
-  const orbit = new Group();
-  const gold = material(new MeshStandardMaterial({ color: '#f7c64d', roughness: .25, metalness: .7 }));
-  const glass = material(new MeshStandardMaterial({ color: '#63d9ca', roughness: .24, metalness: .4 }));
-  const core = new Mesh(geometry(new SphereGeometry(.23, 24, 16)), glass);
-  orbit.add(core);
-  for (let i = 0; i < 3; i++) {
-    const ring = new Mesh(geometry(new TorusGeometry(.82, .014, 8, 80)), gold);
-    ring.rotation.set(.5 + i * .7, i * .9, .3); orbit.add(ring);
-    const node = new Mesh(geometry(new SphereGeometry(.057, 12, 8)), i % 2 ? glass : gold);
-    node.position.set(Math.cos(i * 2.1) * .8, Math.sin(i * 2.1) * .8, 0); orbit.add(node);
+  // An original miniature ringed planet. The reference guides its material and silhouette.
+  const planet = new Group();
+  const sand = material(new MeshStandardMaterial({ color: '#b98d55', roughness: .7, metalness: .1 }));
+  const ringMaterial = material(new MeshStandardMaterial({ color: '#d9c18b', roughness: .6, metalness: .3, side: 2 }));
+  const canvas=document.createElement('canvas');canvas.width=256;canvas.height=128;
+  const paint=canvas.getContext('2d')!;
+  for(let y=0;y<128;y++){const band=Math.sin(y*.28)*9+Math.sin(y*.77)*4;paint.fillStyle=`hsl(${35+Math.sin(y*.17)*4} 36% ${56+band}%)`;paint.fillRect(0,y,256,1);}
+  const bands=new CanvasTexture(canvas);bands.colorSpace=SRGBColorSpace;textures.add(bands);sand.map=bands;sand.color.set('#ffffff');
+  planet.add(new Mesh(geometry(new SphereGeometry(.54, 40, 28)), sand));
+  for (let i = 0; i < 22; i++) {
+    const ring = new Mesh(geometry(new TorusGeometry(.75 + i * .014, .012, 4, 80)), ringMaterial);
+    ring.rotation.x = .95; planet.add(ring);
   }
-  scene.add(orbit);
+  planet.rotation.set(.2, -.3, -.35); scene.add(planet);
 
   let width = 1, height = 1, running = false, destroyed = false, contextLost = false, surfaceReady = false, surfaceFailed = false;
   let frame = 0, phase = 0, previous = 0, progress = 0;
@@ -79,10 +81,10 @@ export function createHeroScene(container: HTMLDivElement): HeroSceneController 
     moon.position.set(width * (compact ? .3 : .315), height * (compact ? .255 : .285) - progress * height * .085, 0);
     record.scale.setScalar(compact ? 36 : Math.min(70, width * .057));
     record.position.set(-width * (compact ? .33 : .345), -height * .19 + Math.sin(phase * .45) * 5 + progress * height * .1, 15);
-    record.rotation.z = .25 + phase * .025 + progress * .65;
-    orbit.scale.setScalar(compact ? 40 : Math.min(80, width * .065));
-    orbit.position.set(width * .345, -height * .205 + Math.cos(phase * .4) * 6 + progress * height * .12, 15);
-    orbit.rotation.set(.15 + phase * .018, .3 + progress * .8, -.2 + phase * .04);
+    record.rotation.z = .25 + phase * .85 + progress * .65;
+    planet.scale.setScalar(compact ? 40 : Math.min(80, width * .065));
+    planet.position.set(width * .345, -height * .205 + Math.cos(phase * .4) * 6 + progress * height * .12, 15);
+    planet.rotation.set(.15, .25 + Math.sin(phase * .12) * .16, -.35 + progress * .2);
   };
   const resize = () => {
     width = Math.max(1, container.clientWidth); height = Math.max(1, container.clientHeight);

@@ -1,3 +1,5 @@
+import { BucketList } from './BucketList';
+import { WritingCards } from './Catalogue';
 import { useId, useState } from 'react';
 import { SocialIcon } from './SocialIcon';
 import { councilLinks, councilDescription } from './content';
@@ -24,6 +26,7 @@ type HistoricalFigure = {
 };
 
 const figures: HistoricalFigure[] = [
+  {id:'nobunaga',name:'Oda Nobunaga',place:'Sengoku Japan',image:'nobunaga.webp',width:600,height:1343,alt:'Historical portrait of Oda Nobunaga by Kanō Sōshū, 1583.',topic:'Unification & upheaval',context:'A central figure in the struggle to unify sixteenth century Japan. Power, ambition and a changing political order.',wiki:'Oda_Nobunaga',credit:'Kanō Sōshū / Historiographical Institute, University of Tokyo',source:'Oda-Nobunaga.jpg',license:'Public domain artwork and faithful reproduction, as classified by Wikimedia Commons'},
   {
     id: 'sankara', name: 'Thomas Sankara', place: 'Burkina Faso',
     image: 'sankara.webp', width: 298, height: 400,
@@ -185,10 +188,12 @@ export function SocietySection({ paused = false }: { paused?: boolean }) {
       </details>
 
       <IdeasWall paused={paused}/>
+      <BucketList/>
       <CategoryGoals category="ideas"/>
+      <WritingCards/>
       <div id="council-ideas" className="society-channel reveal" tabIndex={-1}>
         <div className="society-channel-copy"><p className="eyebrow">KEEP THE CURIOSITY GOING</p><h3>The Curious<br/><em>Council</em></h3><p>{councilDescription}</p></div>
-        <div className="society-channel-links">{councilLinks.map(link => <a href={link.url} key={link.label} target="_blank" rel="noreferrer" aria-label={`The Curious Council on ${link.label}`}><SocialIcon platform={link.label}/><span>{link.label}</span></a>)}<a href="https://substack.com/@soralive" target="_blank" rel="noreferrer"><SocialIcon platform="Substack"/><span>My Substack profile</span></a></div>
+        <div className="society-channel-links">{councilLinks.map(link => <a href={link.url} key={link.label} target="_blank" rel="noreferrer" aria-label={`The Curious Council on ${link.label}`}><SocialIcon platform={link.label}/><span>{link.label}</span></a>)}<a href="https://substack.com/@soralives" target="_blank" rel="noreferrer"><SocialIcon platform="Substack"/><span>My Substack profile</span></a></div>
       </div>
       <div className="society-collaboration reveal"><h3>A conversation worth starting.</h3><p>For thoughtful collaborations, community projects and ideas that deserve a wider conversation.</p><CollaborationLinks category="ideas"/></div>
     </div>

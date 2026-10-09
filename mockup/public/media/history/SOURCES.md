@@ -116,3 +116,7 @@ The site uses responsive CSS presentation crops. The underlying web files preser
 | `castro.webp` | 732 × 541 | 29,992 |
 | `alexander.webp` | 750 × 1000 | 338,176 |
 | `genghis.webp` | 787 × 1000 | 93,992 |
+
+## Oda Nobunaga
+
+Kanō Sōshū, 1583. Historiographical Institute, University of Tokyo. Public domain historical artwork and faithful reproduction. Source: https://commons.wikimedia.org/wiki/File:Oda-Nobunaga.jpg . Original resized to 600 pixels wide and compressed as WebP. Presentation uses a responsive crop; no historical details altered. Added 9 October 2026.

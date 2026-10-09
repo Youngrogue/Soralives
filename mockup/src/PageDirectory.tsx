@@ -6,10 +6,11 @@ import { moveToAnchor, ordinaryClick } from './navigation';
 import type { MouseEvent } from 'react';
 
 const contents: Partial<Record<RouteId, { label: string; href: string }[]>> = {
-  tech: [{label:'Projects',href:'#projects'},{label:'In progress',href:'#tech-goals'},{label:'Experience',href:'#experience'},{label:'Toolkit',href:'#toolkit'},{label:'Council',href:'#curious-council'},{label:'Work together',href:'#services'}],
-  sound: [{label:'Recorded sets',href:'#sets'},{label:'Playlists',href:'#playlists'},{label:'In the making',href:'#music-goals'},{label:'Events & bookings',href:'#events'}],
-  arts: [{label:'The Library',href:'/library/'},{label:'Anime finds',href:'#anime-finds'},{label:'Gaming',href:'#gaming'},{label:'What’s next',href:'#culture-goals'}],
-  freedom: [{label:'Histories',href:'#histories'},{label:'Wall of ideas',href:'#ideas-wall'},{label:'Writing',href:'#ideas-goals'},{label:'Council',href:'#council-ideas'}],
+  catalogue:[{label:'The collection',href:'#collection'},{label:'Writing',href:'#writing'}],
+  tech: [{label:'Projects',href:'#projects'},{label:'Next steps',href:'#tech-goals'},{label:'Experience',href:'#experience'},{label:'Toolkit',href:'#toolkit'},{label:'Council',href:'#curious-council'},{label:'Work together',href:'#services'}],
+  sound: [{label:'Recorded sets',href:'#sets'},{label:'Playlists',href:'#playlists'},{label:'Next steps',href:'#music-goals'},{label:'Events & bookings',href:'#events'}],
+  arts: [{label:'The Library',href:'/library/'},{label:'Anime finds',href:'#anime-finds'},{label:'Gaming',href:'#gaming'},{label:'Next steps',href:'#culture-goals'}],
+  freedom: [{label:'Histories',href:'#histories'},{label:'Wall of ideas',href:'#ideas-wall'},{label:'Bucket List',href:'#bucket-list'},{label:'Writing',href:'#writing'},{label:'Council',href:'#council-ideas'}],
 };
 
 export function PageDirectory({routeId, paused, setPaused, reducedMotion}: PageProps & {routeId: RouteId}) {

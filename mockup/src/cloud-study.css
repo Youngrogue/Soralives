@@ -4,18 +4,3 @@
 .cloud-shader-field[data-ready='true'] .cloud-shader-canvas{opacity:1}
 .cloud-shader-field[data-ready='true'] .cloud-shader-fallback{visibility:hidden}
 .cloud-study-scrim{position:absolute;inset:0;background:linear-gradient(180deg,#08225333 0%,#0c234e2b 52%,#0b204eaa 100%);z-index:1}
-.cloud-study-controls{position:absolute;z-index:5;top:110px;left:var(--gutter);width:300px;color:var(--ink);font:13px/1.5 var(--body);pointer-events:auto}
-.cloud-study-controls summary{width:max-content;cursor:pointer;display:flex;align-items:center;gap:18px;padding:10px 16px;border-radius:24px;background:#fffaf0f5;border:1px solid #17212d33;box-shadow:0 3px 15px #09224520;list-style:none;font-weight:600;min-height:44px}
-.cloud-study-controls summary::-webkit-details-marker{display:none}
-.cloud-study-controls summary span{font:10px var(--mono);font-weight:400;opacity:.8}
-.cloud-study-controls summary:focus-visible,.cloud-study-panel button:focus-visible,.cloud-study-panel a:focus-visible,.cloud-study-panel input:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
-.cloud-study-panel{margin-top:10px;padding:20px;background:#fffaf0;border:1px solid #17212d33;border-radius:16px;box-shadow:0 12px 40px #09224530;max-height:calc(100svh - 190px);overflow-y:auto}
-.cloud-study-panel p{margin:0 0 12px}.cloud-study-label{font:10px var(--mono);text-transform:uppercase;letter-spacing:.08em}
-.cloud-study-panel fieldset{padding:0;border:0;margin:14px 0}.cloud-study-panel legend{margin-bottom:8px;font-weight:600}
-.cloud-study-palettes{display:flex;gap:8px}.cloud-study-palettes button{flex:1;padding:8px;min-height:44px;border:1px solid #17212d55;border-radius:8px;background:transparent;color:inherit;font:12px var(--body);cursor:pointer}
-.cloud-study-palettes button[aria-pressed='true']{background:#173b83;color:#fff}
-.cloud-study-panel label{display:flex;justify-content:space-between;font-weight:600}.cloud-study-panel output{font-weight:400;font-family:var(--mono)}
-.cloud-study-panel input{width:100%;height:30px;margin:4px 0 12px;accent-color:#173b83}
-.cloud-study-panel .cloud-study-hint{font-size:11px;color:#4f5a65}
-.cloud-study-panel a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:4px;font-weight:600}
-@media(max-width:600px){.cloud-study-controls{top:89px;left:24px;width:min(300px,calc(100% - 48px))}.cloud-study-controls summary{padding:8px 12px;font-size:11px}.cloud-study-panel{max-height:calc(100svh - 165px)}}

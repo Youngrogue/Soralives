@@ -1,3 +1,7 @@
+# Current source of truth
+
+The approved 9 October final revision is tracked in [FINAL-REVISION-PLAN.md](FINAL-REVISION-PLAN.md), with verification in [FINAL-REVISION-CHECKLIST.md](FINAL-REVISION-CHECKLIST.md). This supersedes earlier compact film cards, manual only portraits and cloud study controls. The material below is retained as implementation history.
+
 # Soraverse v2
 
 Cloud revision, 9 October 2026: the approved cloud study is promoted into `mockup` on `codex/cloud-transitions` for a GitHub branch preview. See [cloud transition notes](CLOUD-TRANSITIONS.md). Production promotion remains pending.

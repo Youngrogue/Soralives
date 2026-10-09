@@ -124,7 +124,7 @@ export const socials: SocialLink[] = [
   },
   {
     "label": "Substack",
-    "url": "https://substack.com/@soralive"
+    "url": "https://substack.com/@soralives"
   }
 ];
 

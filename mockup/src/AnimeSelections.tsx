@@ -1,0 +1,3 @@
+import { animeSelections } from './anime-content';
+import './catalogue.css';
+export function AnimeSelections(){return <section className="anime-selections" aria-labelledby="anime-selection-title"><div className="anime-selection-heading"><span className="eyebrow">A FEW FROM MY SELECTIONS</span><h3 id="anime-selection-title">Worlds I keep coming back to.</h3></div><ol>{animeSelections.map(item=><li key={item.title}><span className="anime-rank">{item.rank?String(item.rank).padStart(2,'0'):'ON MY RADAR'}</span><div><h4>{item.title}</h4><p>{item.context}</p><a href={item.post} target="_blank" rel="noreferrer">View original post</a></div></li>)}</ol><a href="/catalogue/" className="text-link">More in the Catalogue</a></section>;}

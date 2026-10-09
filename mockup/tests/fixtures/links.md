@@ -2,7 +2,7 @@
 
 Public URLs extracted from the approved link inventory on 6 October 2026.
 
-[Link](https://substack.com/@soralive)
+[Link](https://substack.com/@soralives)
 [Link](https://hades.soralives.xyz/)
 [Link](https://soundcloud.com/soralive)
 [Link](https://soundcloud.com/soralive/sora-live-set-tsl-mondays)

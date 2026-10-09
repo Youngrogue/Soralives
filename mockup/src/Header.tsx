@@ -88,7 +88,7 @@ export function Header({ routeId, paused = false }: { routeId: RouteId; paused?:
       <div className="menu-surface">
         <div className="menu-top"><a href="/" className="brand" onClick={e => followLink(e, '/')}><Star/><span>soralives.</span></a><button ref={closeButton} className="menu-trigger close-trigger" onClick={event => closeMenu(event.detail === 0)}><span>Close</span><i className="hamburger is-close" aria-hidden="true"><b/><b/></i></button></div>
         <div className="directory-intro"><div><p className="eyebrow">THE SORAVERSE</p><h2 id="menu-heading">Find your <em>way.</em></h2></div><nav className="directory-shortcuts" aria-label="Main pages">
-          {[{label:'Home',href:'/'},{label:'About Sora',href:'/#about'},{label:'Contact',href:'/#contact'}].map(link => <a key={link.href} href={link.href} onClick={e=>followLink(e,link.href)}>{link.label}</a>)}
+          {[{label:'Home',href:'/'},{label:'About Sora',href:'/#about'},{label:'Catalogue',href:'/catalogue/'},{label:'Contact',href:'/#contact'}].map(link => <a key={link.href} href={link.href} onClick={e=>followLink(e,link.href)}>{link.label}</a>)}
         </nav></div>
         <nav className="directory-grid" aria-label="All sections and pages">
           {menuGroups.map(group => <section className="directory-group" key={group.href}>

@@ -1,36 +1,21 @@
-.hero-atmosphere {
-  position: absolute;
-  inset: 0;
-  z-index: -3;
-  overflow: hidden;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 90%, #aac9ef 0%, #4d79c8 38%, var(--blue) 85%);
-}
-
-.hero-atmosphere-poster,
-.hero-atmosphere-film {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: center;
-}
-
-.hero-atmosphere-film {
-  opacity: 0;
-  transition: opacity 250ms var(--ease-out);
-}
-
-.hero-atmosphere[data-state='ready'] .hero-atmosphere-film {
-  opacity: 1;
-}
-
-@media (max-width: 600px), (prefers-reduced-motion: reduce) {
-  .hero-atmosphere-film {
-    display: none;
-    transition: none;
-  }
-}
+.hero-atmosphere{position:absolute;inset:0;z-index:-3;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 50% 90%,#aac9ef 0%,#4d79c8 38%,var(--blue) 85%)}
+.hero-sky-backdrop{position:absolute;inset:-2%;transform:scale(1.025)}
+.hero-atmosphere-poster,.hero-atmosphere-film{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center}
+.hero-atmosphere-film{opacity:0;transition:opacity 250ms var(--ease-out)}
+.hero-atmosphere[data-state='ready'] .hero-atmosphere-film{opacity:1}
+.hero-sky-tint{position:absolute;inset:0;background:linear-gradient(180deg,#13348950,transparent 40%,#1851b32b);z-index:1}
+.hero-cloud-bank{position:absolute;width:88%;bottom:-16%;z-index:3;opacity:.65;will-change:transform}
+.hero-cloud-bank img{display:block;width:100%;max-width:none;animation:hero-cloud-unfold 1600ms var(--ease-out) both,hero-cloud-drift 18s 1600ms ease-in-out infinite alternate;animation-play-state:paused}
+.hero-cloud-bank-left{left:-39%}.hero-cloud-bank-right{right:-42%;bottom:-22%;opacity:.48}
+.hero-cloud-bank-right img{animation-name:hero-cloud-unfold-right,hero-cloud-drift;animation-direction:normal,alternate-reverse}
+.hero-atmosphere[data-motion='running'] .hero-cloud-bank img{animation-play-state:running}
+@keyframes hero-cloud-unfold{from{transform:translate3d(12%,-24%,0) scale(1.15)}to{transform:translate3d(-2%,2%,0) scale(1.02)}}
+@keyframes hero-cloud-unfold-right{from{transform:translate3d(-12%,-24%,0) scale(1.15)}to{transform:translate3d(9%,-5%,0) scale(1.08)}}
+@keyframes hero-cloud-drift{from{transform:translate3d(-2%,2%,0) scale(1.02)}to{transform:translate3d(9%,-5%,0) scale(1.08)}}
+.hero-scene{position:absolute;inset:0;z-index:2}
+.hero-scene-canvas{display:block;position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 250ms var(--ease-out)}
+.hero-scene[data-mode='webgl'] .hero-scene-canvas{opacity:1}
+.hero-moon-fallback{position:absolute;left:73%;top:11%;width:clamp(110px,17vw,235px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff6 0%,transparent 45%,#101d4280 87%),url('/media/hero/lunar-surface.jpg') 48% 50%/200% 100%;box-shadow:0 0 60px #d7e8ff24,inset -8px -6px 15px #20356855;transition:opacity 250ms var(--ease-out)}
+.hero-scene[data-mode='webgl'] .hero-moon-fallback{opacity:0}
+@media(max-width:600px){.hero-cloud-bank{width:150%;bottom:-6%;opacity:.4}.hero-cloud-bank-left{left:-95%}.hero-cloud-bank-right{right:-100%;bottom:-7%}.hero-moon-fallback{left:67%;top:17%;width:105px}}
+@media(prefers-reduced-motion:reduce){.hero-cloud-bank img{animation:none}.hero-atmosphere-film{display:none;transition:none}.hero-scene-canvas,.hero-moon-fallback{transition:none}}

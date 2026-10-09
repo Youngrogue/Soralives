@@ -2,7 +2,7 @@
 
 The Soraverse is Sora's personal website for projects, music, culture and ideas.
 
-The working React and TypeScript site is in `mockup/`. It includes local media, an illustrated Higgsfield cloud reveal, a cinematic intro portrait, four career entries, three project showcases and a searchable cultural library.
+The working React and TypeScript site is in `mockup/`. It includes local media, procedural Aceternity clouds with transitions between pages, a cinematic intro portrait, four career entries, three project showcases and a searchable cultural library.
 
 ## Run
 
@@ -23,7 +23,7 @@ npm test
 npm run build
 ```
 
-Build output is `mockup/dist`. The homepage and `/library/` have separate HTML entry points. This is still a preview and retains `noindex, nofollow` until launch review.
+Build output is `mockup/dist`. Home, Tech, Sound, Arts, Society and the Library have separate HTML entry points. Preview builds retain `noindex, nofollow`; Vercel production builds enable discovery.
 
 ## Repository scope
 
@@ -33,5 +33,4 @@ The existing local workspace uses a `node_modules` symlink into a historical pro
 
 ## Next work
 
-See [dependencies and access](docs/DEPENDENCIES-AND-ACCESS.md) and [the next revision](docs/NEXT-REVISION.md). The next design revision has not been implemented. The baseline branch is intended to preserve the current visual version before that work begins.
-# Soralives
+See [dependencies and access](docs/DEPENDENCIES-AND-ACCESS.md) and [the next revision](docs/NEXT-REVISION.md). The `codex/cloud-transitions` branch contains the reviewed cloud direction and separate world pages. Vercel can build a preview using the existing `mockup` root. See [cloud transition notes](docs/CLOUD-TRANSITIONS.md).

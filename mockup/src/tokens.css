@@ -1,0 +1,65 @@
+:root {
+  /* Palette primitives. */
+  --color-ink: #17202a;
+  --color-paper: #f8f5ed;
+  --color-white: #fffdf8;
+  --color-cobalt: #2457ee;
+  --color-coral: #ef6246;
+  --color-gold: #f9cf36;
+  --color-teal: #087e79;
+  --color-navy: #15253e;
+  --color-muted: #535d66;
+  --color-music-wash: #f5a58f;
+  --color-blue-wash: #e8eefc;
+  --color-green-wash: #e8edce;
+  --color-gold-wash: #f5e7a6;
+
+  /* Semantic aliases shared by every chapter. */
+  --ink: var(--color-ink);
+  --paper: var(--color-paper);
+  --surface-raised: var(--color-white);
+  --blue: var(--color-cobalt);
+  --coral: var(--color-coral);
+  --yellow: var(--color-gold);
+  --teal: var(--color-teal);
+  --night: var(--paper);
+  --chalk: var(--ink);
+  --smoke: var(--color-muted);
+  --dim: #62676c;
+  --line: #17202a30;
+  --accent: var(--blue);
+  --body: DM, Arial, sans-serif;
+  --display: Bricolage, Arial, sans-serif;
+  --serif: Playfair, Georgia, serif;
+  --mono: Mono, monospace;
+  --gutter: clamp(24px, 5.2vw, 80px);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --radius-small: 4px;
+  --radius-card: 8px;
+  --shadow-offset: 6px 6px 0 var(--ink);
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-in-out: cubic-bezier(.77, 0, .175, 1);
+  --duration-quick: 160ms;
+  --duration-ui: 280ms;
+  --duration-flip: 450ms;
+  --duration-reveal: 300ms;
+
+  /* Component roles. */
+  --control-height: 44px;
+  --card-surface: var(--surface-raised);
+  --chip-border: var(--line);
+  --section-tech: var(--paper);
+  --section-music: var(--color-music-wash);
+  --section-culture: var(--yellow);
+  --section-society: var(--color-navy);
+  color-scheme: light;
+  font-synthesis: none;
+}

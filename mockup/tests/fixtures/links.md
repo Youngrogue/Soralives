@@ -26,3 +26,20 @@ Public URLs extracted from the approved link inventory on 6 October 2026.
 [Link](https://www.instagram.com/rogueskye)
 [Link](https://www.tiktok.com/@rogueskye)
 [Link](https://x.com/soralives)
+
+## Additional destinations supplied on 7 October 2026
+
+Threads and Council TikTok URLs use the handles supplied by the owner.
+
+[Threads](https://www.threads.com/@rogueskye)
+[The Curious Council on YouTube](https://www.youtube.com/@Curiouscouncil)
+[The Curious Council on TikTok](https://www.tiktok.com/@curious.council)
+
+Anime reference supplied 7 October 2026: https://vt.tiktok.com/ZSbbQswDs/
+Hades destination updated by user 7 October 2026: https://hades.soralives.xyz/
+
+## Working music playlist
+
+[Ideas for my next mixes](https://open.spotify.com/playlist/0fnqoYmoa8xndFh369w1FF)
+
+Supplied 8 October 2026. Sharing parameters removed; playlist metadata not independently available.

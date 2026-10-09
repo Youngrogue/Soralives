@@ -1,0 +1,33 @@
+/* The cloud bridge replaces the copy's generic document fade. */
+@view-transition { navigation: none; }
+.cloud-passage{position:fixed;inset:0;z-index:10000;pointer-events:none;visibility:hidden;overflow:hidden;contain:strict}
+.cloud-passage[data-stage='cover'],.cloud-passage[data-stage='reveal']{visibility:visible;pointer-events:auto}
+.cloud-passage-fill{position:absolute;inset:0;background:#e4edf3;opacity:0}
+.cloud-passage-bank{position:absolute;top:-25%;width:180%;height:150%;max-width:none;object-fit:fill;will-change:transform;filter:brightness(1.08)}
+.cloud-passage-bank-left{left:-35%;transform:translate3d(-110%,0,0) rotate(-14deg)}
+.cloud-passage-bank-right{right:-35%;transform:translate3d(110%,0,0) rotate(166deg)}
+.cloud-passage[data-stage='cover'] .cloud-passage-fill{animation:cloud-cover-fill 420ms var(--ease-in-out) both}
+.cloud-passage[data-stage='cover'] .cloud-passage-bank-left{animation:cloud-cover-left 420ms var(--ease-in-out) both}
+.cloud-passage[data-stage='cover'] .cloud-passage-bank-right{animation:cloud-cover-right 420ms var(--ease-in-out) both}
+.cloud-passage[data-stage='reveal'] .cloud-passage-fill{animation:cloud-reveal-fill 600ms var(--ease-out) both}
+.cloud-passage[data-stage='reveal'] .cloud-passage-bank-left{animation:cloud-reveal-left 600ms var(--ease-in-out) both}
+.cloud-passage[data-stage='reveal'] .cloud-passage-bank-right{animation:cloud-reveal-right 600ms var(--ease-in-out) both}
+@keyframes cloud-cover-fill{0%,35%{opacity:0}100%{opacity:1}}
+@keyframes cloud-cover-left{from{transform:translate3d(-110%,0,0) rotate(-14deg)}to{transform:translate3d(-12%,0,0) rotate(-14deg)}}
+@keyframes cloud-cover-right{from{transform:translate3d(110%,0,0) rotate(166deg)}to{transform:translate3d(12%,0,0) rotate(166deg)}}
+@keyframes cloud-reveal-fill{0%{opacity:1}45%,100%{opacity:0}}
+@keyframes cloud-reveal-left{from{transform:translate3d(-12%,0,0) rotate(-14deg)}to{transform:translate3d(-110%,0,0) rotate(-14deg)}}
+@keyframes cloud-reveal-right{from{transform:translate3d(12%,0,0) rotate(166deg)}to{transform:translate3d(110%,0,0) rotate(166deg)}}
+/* Clouds stay in the margins and navigation gateways, outside reading areas. */
+.page-directory{position:relative;isolation:isolate;overflow:hidden}
+.page-clouds{pointer-events:none;overflow:hidden}
+.page-clouds-opening{position:absolute;inset:0;z-index:-1;opacity:.62;mask-image:linear-gradient(#000 0%,#0009 65%,transparent 100%)}
+.page-breadcrumb,.page-contents{position:relative}
+.page-breadcrumb nav{background:color-mix(in srgb,var(--page-wash,var(--paper)) 90%,transparent);border-radius:5px;padding:8px 10px;margin-left:-10px}
+.page-motion{background:var(--page-wash,var(--paper))}
+.other-worlds{position:relative;isolation:isolate;overflow:hidden;padding-top:100px}
+.page-clouds-gateway{position:absolute;inset:0;z-index:-1;opacity:.65;mask-image:linear-gradient(transparent,#0008 28%,#000 60%,transparent)}
+.other-worlds .eyebrow{position:relative;display:inline-block;background:var(--paper);padding:6px 10px;margin-left:-10px}
+@media(max-width:600px){.cloud-passage-bank{width:260%;height:140%;top:-20%}.cloud-passage-bank-left{left:-75%}.cloud-passage-bank-right{right:-75%}.other-worlds{padding-top:80px}}
+@media(prefers-reduced-motion:reduce){.cloud-passage{display:none!important}}
+html[data-motion='paused'] .cloud-passage{display:none}

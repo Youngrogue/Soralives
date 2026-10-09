@@ -1,25 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
-import { Arrow, Star } from './Icons';
+import { Star } from './Icons';
+import { SocialIcon } from './SocialIcon';
 import { socials } from './content';
+import type { RouteId } from './routes.mjs';
 import { menuGroups, moveToAnchor, ordinaryClick } from './navigation';
 
-export function Header({ isLibrary }: { isLibrary: boolean }) {
+export function Header({ routeId, paused = false }: { routeId: RouteId; paused?: boolean }) {
+  const isLibrary = routeId === 'library';
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState('');
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 32);
-      if (!isLibrary) {
-        const sections = ['about', 'music', 'tech', 'culture', 'ideas', 'contact'];
-        setActive(sections.filter(id => (document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= 180).at(-1) ?? '');
-      }
+
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -28,7 +27,7 @@ export function Header({ isLibrary }: { isLibrary: boolean }) {
       if (closeTimer.current) clearTimeout(closeTimer.current);
       document.body.classList.remove('menu-open');
     };
-  }, [isLibrary]);
+  }, []);
 
   function finishClose(restoreFocus: boolean) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -45,10 +44,10 @@ export function Header({ isLibrary }: { isLibrary: boolean }) {
     closeButton.current?.focus({ preventScroll: true });
     setOpen(true);
   }
-  function closeMenu() {
+  function closeMenu(instant = false) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpen(false);
-    closeTimer.current = setTimeout(() => finishClose(true), window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 260);
+    closeTimer.current = setTimeout(() => finishClose(true), instant || paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 280);
   }
   function keepMenuFocus(event: KeyboardEvent<HTMLDialogElement>) {
     if (event.key !== 'Tab') return;
@@ -67,13 +66,13 @@ export function Header({ isLibrary }: { isLibrary: boolean }) {
     if (!ordinaryClick(event) || !href.startsWith('/')) return;
     const destination = new URL(href, location.origin);
     const samePage = destination.pathname.replace(/\/$/, '') === location.pathname.replace(/\/$/, '');
-    if (!samePage) return;
+    if (!samePage) { finishClose(false); return; }
     event.preventDefault();
     finishClose(false);
     if (location.hash !== destination.hash) history.pushState(null, '', destination.pathname + destination.hash);
     if (isLibrary) window.dispatchEvent(new HashChangeEvent('hashchange'));
     const target = isLibrary && destination.hash ? `tab-${destination.hash.slice(1)}` : destination.hash.slice(1) || (isLibrary ? 'library-title' : 'top');
-    moveToAnchor(target);
+    moveToAnchor(target, event.detail !== 0 && !paused);
   }
   const linkProps = (href: string) => href.startsWith('https:') ? { target: '_blank', rel: 'noreferrer' } : {};
 
@@ -81,23 +80,23 @@ export function Header({ isLibrary }: { isLibrary: boolean }) {
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <a className="brand" href="/" aria-label="Sora Lives home"><Star/><span>sora<span className="brand-light">lives</span><span className="brand-dot">.</span></span></a>
       <nav className="desktop-nav" aria-label="Main navigation">
-        {menuGroups.map(group => <a key={group.href} href={group.href} aria-current={!isLibrary && group.href === `/#${active}` ? 'location' : undefined} onClick={e => followLink(e, group.href)}>{group.label}</a>)}
+        {menuGroups.map(group => <a key={group.href} href={group.href} aria-current={group.href === `/${isLibrary ? 'arts' : routeId}/` ? 'page' : undefined} onClick={e => followLink(e, group.href)}>{group.label}</a>)}
       </nav>
       <button ref={trigger} className="menu-trigger" aria-haspopup="dialog" aria-expanded={open} aria-controls="explore-menu" onClick={showMenu}><span>Explore</span><i className="hamburger" aria-hidden="true"><b/><b/></i></button>
     </header>
-    <dialog ref={dialog} id="explore-menu" aria-labelledby="menu-heading" className={`menu-dialog ${open ? 'is-open' : ''}`} onKeyDown={keepMenuFocus} onCancel={e => { e.preventDefault(); closeMenu(); }}>
+    <dialog ref={dialog} id="explore-menu" aria-labelledby="menu-heading" className={`menu-dialog ${open ? 'is-open' : ''}`} onKeyDown={keepMenuFocus} onCancel={e => { e.preventDefault(); closeMenu(true); }}>
       <div className="menu-surface">
-        <div className="menu-top"><a href="/" className="brand" onClick={e => followLink(e, '/')}><Star/><span>soralives.</span></a><button ref={closeButton} className="menu-trigger close-trigger" onClick={closeMenu}><span>Close</span><i className="hamburger is-close" aria-hidden="true"><b/><b/></i></button></div>
+        <div className="menu-top"><a href="/" className="brand" onClick={e => followLink(e, '/')}><Star/><span>soralives.</span></a><button ref={closeButton} className="menu-trigger close-trigger" onClick={event => closeMenu(event.detail === 0)}><span>Close</span><i className="hamburger is-close" aria-hidden="true"><b/><b/></i></button></div>
         <div className="directory-intro"><div><p className="eyebrow">THE SORAVERSE</p><h2 id="menu-heading">Find your <em>way.</em></h2></div><nav className="directory-shortcuts" aria-label="Main pages">
-          {[{label:'Home',href:'/'},{label:'About Sora',href:'/#about'},{label:'Contact',href:'/#contact'}].map(link => <a key={link.href} href={link.href} onClick={e=>followLink(e,link.href)}>{link.label}<Arrow/></a>)}
+          {[{label:'Home',href:'/'},{label:'About Sora',href:'/#about'},{label:'Contact',href:'/#contact'}].map(link => <a key={link.href} href={link.href} onClick={e=>followLink(e,link.href)}>{link.label}</a>)}
         </nav></div>
         <nav className="directory-grid" aria-label="All sections and pages">
           {menuGroups.map(group => <section className="directory-group" key={group.href}>
-            <h3><a href={group.href} onClick={e=>followLink(e,group.href)}>{group.label}<Arrow/></a></h3>
-            <ul>{group.links.map(link=><li key={link.href + link.label}><a href={link.href} {...linkProps(link.href)} onClick={e=>followLink(e,link.href)}><span>{link.label}{link.note&&<small>{link.note}</small>}</span>{link.href.startsWith('https:')&&<Arrow diagonal/>}</a></li>)}</ul>
+            <h3><a href={group.href} onClick={e=>followLink(e,group.href)}>{group.label}</a></h3>
+            <ul>{group.links.map(link=><li key={link.href + link.label}><a href={link.href} {...linkProps(link.href)} onClick={e=>followLink(e,link.href)}><span>{link.label}{link.note&&<small>{link.note}</small>}</span></a></li>)}</ul>
           </section>)}
         </nav>
-        <div className="directory-footer"><a href="mailto:Him@soralives.xyz" className="directory-email">Him@soralives.xyz<Arrow diagonal/></a><nav aria-label="Social profiles">{socials.filter(s=>s.label!=='Substack').map(s=><a key={s.label} href={s.url} target="_blank" rel="noreferrer">{s.label}<Arrow diagonal/></a>)}</nav></div>
+        <div className="directory-footer"><a href="mailto:Him@soralives.xyz" className="directory-email">Him@soralives.xyz</a><nav aria-label="Social profiles">{socials.filter(s=>s.label!=='Substack').map(s=><a key={s.label} href={s.url} target="_blank" rel="noreferrer"><SocialIcon platform={s.label}/><span>{s.label}</span></a>)}</nav></div>
       </div>
     </dialog>
   </>;

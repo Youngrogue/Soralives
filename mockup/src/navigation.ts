@@ -2,30 +2,40 @@ import type { MouseEvent } from 'react';
 
 export type MenuLink = { label: string; href: string; note?: string };
 export const menuGroups: { label: string; href: string; links: MenuLink[] }[] = [
-  { label: 'Music & DJ', href: '/#music', links: [
-    { label: 'Recorded sets', href: '/#sets' },
-    { label: 'Playlists & selections', href: '/#playlists' },
-    { label: 'DJ sets & events', href: '/#events' },
-  ] },
-  { label: 'Tech & Business', href: '/#tech', links: [
-    { label: 'Experience', href: '/#experience' },
-    { label: 'Skills & tools', href: '/#toolkit' },
-    { label: 'Projects', href: '/#projects' },
-    { label: 'Delphi Atlas', href: '/#delphi' },
-    { label: 'Project Hades', href: '/#hades', note: 'Live' },
-    { label: 'Project Odyssey', href: '/#odyssey', note: 'In development' },
-    { label: 'Product & business enquiries', href: '/#services' },
+  { label: 'Tech & Business', href: '/tech/', links: [
+    { label: 'Recent project', href: '/tech/#projects' },
+    { label: 'Delphi Atlas', href: '/tech/#delphi' },
+    { label: 'Project Hades', href: '/tech/#hades', note: 'Live' },
+    { label: 'Project Odyssey', href: '/tech/#odyssey', note: 'In development' },
+    { label: 'Goals & work in progress', href: '/tech/#tech-goals' },
+    { label: 'Experience', href: '/tech/#experience' },
+    { label: 'Skills & tools', href: '/tech/#toolkit' },
+    { label: 'The Curious Council', href: '/tech/#curious-council' },
+    { label: 'Product & business enquiries', href: '/tech/#services' },
     { label: 'Professional website', href: 'https://tobiarogunmati.com/' },
   ] },
-  { label: 'Arts & Culture', href: '/#culture', links: [
+  { label: 'Music & DJ', href: '/sound/', links: [
+    { label: 'Recorded sets', href: '/sound/#sets' },
+    { label: 'Playlists & selections', href: '/sound/#playlists' },
+    { label: 'Music goals', href: '/sound/#music-goals' },
+    { label: 'DJ sets & events', href: '/sound/#events' },
+  ] },
+  { label: 'Arts & Culture', href: '/arts/', links: [
     { label: 'The Library', href: '/library/' },
+    { label: 'Anime finds', href: '/arts/#anime-finds' },
     { label: 'Films, series & animation', href: '/library/#screen' },
     { label: 'Manga & reading', href: '/library/#reading' },
-    { label: 'Games', href: '/library/#games' },
+    { label: 'Games & gaming', href: '/arts/#gaming' },
+    { label: 'Games shelf', href: '/library/#games' },
+    { label: 'Culture goals', href: '/arts/#culture-goals' },
   ] },
-  { label: 'Society & Ideas', href: '/#ideas', links: [
-    { label: 'Interests & perspectives', href: '/#ideas' },
-    { label: 'Writing on Substack', href: 'https://substack.com/@soralive' },
+  { label: 'Society & Ideas', href: '/freedom/', links: [
+    { label: 'Interests & perspectives', href: '/freedom/#ideas' },
+    { label: 'Histories & perspectives', href: '/freedom/#histories' },
+    { label: 'Wall of ideas', href: '/freedom/#ideas-wall' },
+    { label: 'Ideas & writing goals', href: '/freedom/#ideas-goals' },
+    { label: 'The Curious Council', href: '/freedom/#council-ideas' },
+    { label: 'My Substack profile', href: 'https://substack.com/@soralive' },
   ] },
 ];
 

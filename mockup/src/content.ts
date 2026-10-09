@@ -64,6 +64,11 @@ export const musicLinks: ContentLink[] = [
 
 export const playlistLinks: ContentLink[] = [
   {
+    label: 'Ideas for my next mixes',
+    detail: 'My working Spotify playlist',
+    url: 'https://open.spotify.com/playlist/0fnqoYmoa8xndFh369w1FF'
+  },
+  {
     "label": "Evolution",
     "detail": "Spotify playlist",
     "url": "https://spotify.link/RNSiZjgPtXb"
@@ -114,9 +119,22 @@ export const socials: SocialLink[] = [
     "url": "https://x.com/soralives"
   },
   {
+    "label": "Threads",
+    "url": "https://www.threads.com/@rogueskye"
+  },
+  {
     "label": "Substack",
     "url": "https://substack.com/@soralive"
   }
+];
+
+export const councilLinks: SocialLink[] = [
+  { label: 'YouTube', url: 'https://www.youtube.com/@Curiouscouncil' },
+  { label: 'TikTok', url: 'https://www.tiktok.com/@curious.council' },
+];
+
+export const animeLinks: ContentLink[] = [
+  { label: 'Anime on TikTok', detail: 'From my saved discoveries', url: 'https://vt.tiktok.com/ZSbbQswDs/' },
 ];
 
 export const libraryShelves: LibraryShelf[] = [
@@ -411,3 +429,5 @@ export const libraryShelves: LibraryShelf[] = [
     ]
   }
 ];
+
+export const councilDescription = 'Visual stories and explainers exploring technology, history, power, culture and the ideas shaping our world.';

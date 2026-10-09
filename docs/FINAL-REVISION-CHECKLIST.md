@@ -29,11 +29,21 @@ All seven pages were checked at 320 pixels, with further 390 pixel phone and 136
 
 A local fault proxy delayed the application module by four seconds and separately returned a failed module response. The delayed page became usable normally. After the failed load, the eight second recovery removed the clouds and showed working retry, email and Substack destinations. The proxy is a temporary test utility and is not shipped. Pausing motion stopped the decorative staff and DJ animation. Production metadata and the Catalogue sitemap entry were checked in a local production build; the 404 stays nonindexable.
 
-Deployed preview verification is pending. Production has not been promoted. Native film controls are present and complete playback was observed; OS fullscreen entry could not be conclusively inspected through this browser session. Physical touch devices, system level reduced motion settings and hardware performance profiling remain final device checks. Responsive browser sizing and the explicit motion pause path were verified; no device benchmark is claimed.
+Production has not been promoted. Native film controls are present and complete playback was observed; OS fullscreen entry could not be conclusively inspected through this browser session. Physical touch devices, system level reduced motion settings and hardware performance profiling remain final device checks. Responsive browser sizing and the explicit motion pause path were verified; no device benchmark is claimed.
+
+## Deployed preview evidence
+
+Implementation commit: `3822fc39fa9fe1f3e64eff14e36e608f2660aa5e` on `codex/cloud-transitions`.
+
+[Verified Vercel preview](https://soralives-i9sqo21ox-tobiarogunmati-9307s-projects.vercel.app/)
+
+Both linked Vercel projects reported successful Preview deployments. Their production branch remains main. This revision did not promote either production project or change main, v2 or the main snapshot.
+
+All seven routes were opened on the actual deployed preview. Home renders the staff and hero graphics. Explore navigates to Catalogue with a completed cloud arrival. Catalogue shows both undated source posts and the corrected Substack profile. At 390 pixels, Tech retains equal 316 pixel screenshot and video widths, native controls, no film autoplay and the exact Resume referral. Society contains Oda Nobunaga and 19 initial public bucket items without intimate text. Back, Forward and refresh restored usable content. Loaded assets had no broken images on the checked pages. The preview uses noindex, nofollow and production canonical destinations.
 
 ## Product clarity and discovery
 
-Status: in progress. Codex owns implementation and verification; Sora owns personal content and final publication. Purpose and all four worlds are clear, planned projects retain honest status, Substack profile is distinguished from articles, and no completion or dates were invented. Final preview and content acceptance remain the next action.
+Status: in progress. Codex owns implementation and verification; Sora owns personal content and final publication. Purpose and all four worlds are clear, planned projects retain honest status, Substack profile is distinguished from articles, and no completion or dates were invented. The deployed preview has been checked. Sora’s final personal content acceptance and device review remain the next action.
 
 ## Remaining personal inputs
 

@@ -26,7 +26,7 @@ Check desktop, short laptop and narrow phone layouts; keyboard, focus, contrast,
 Status: in progress.
 Owners: Codex for implementation and verification; Sora for personal content and publication.
 Evidence: the approved purpose and four world architecture are retained; the preimplementation desktop and mobile audit found no horizontal overflow or missing loaded images. Catalogue and Substack destinations are explicitly separated. No invented article, completion, date or credit is permitted.
-Next action: inspect the deployed preview, record its evidence and leave final personal content acceptance and production promotion to Sora.
+Next action: Sora reviews the verified preview and remaining personal content, with final device checks before a separately approved production promotion.
 
 ## Remaining personal inputs
 
@@ -34,4 +34,4 @@ Completed bucket items, individual Substack article links, and captions or estab
 
 ## Status and evidence
 
-All planned visual, structural and content work is implemented. Local automated and browser checks are recorded in FINAL-REVISION-CHECKLIST.md. Deployment verification and owner content acceptance remain release gates.
+All planned visual, structural and content work is implemented and pushed. Build, 18 automated checks and both Vercel preview deployments passed. Local and deployed browser evidence, including remaining device checks, is recorded in FINAL-REVISION-CHECKLIST.md. [Review the verified preview](https://soralives-i9sqo21ox-tobiarogunmati-9307s-projects.vercel.app/). Owner content acceptance and production promotion remain pending.
